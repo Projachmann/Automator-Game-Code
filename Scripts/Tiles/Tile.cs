@@ -7,14 +7,11 @@ public class Tile : MonoBehaviour
     [SerializeField] private Color baseColor, offsetColor;
     [SerializeField] private SpriteRenderer renderer;
     [SerializeField] private GameObject highlight;
+    [SerializeField] private bool isPlaceable;
+    public BaseBuilding occupiedUnit;
+    public bool walkable => isPlaceable && occupiedUnit == null;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDown()
     {
         
     }
@@ -32,5 +29,15 @@ public class Tile : MonoBehaviour
     private void OnMouseExit()
     {
         highlight.SetActive(false);
+    }
+
+    public void SetBuilding(BaseBuilding building)
+    {
+        if (building.occupiedTile != null) building.occupiedTile.occupiedUnit = null;
+        
+        //If something gets spawned on this tile it nothing else can spawn there
+        building.transform.position = transform.position;
+        occupiedUnit = building;
+        building.occupiedTile = this;
     }
 }
