@@ -8,6 +8,7 @@ public class BuildingManager : MonoBehaviour
     public static BuildingManager Instance;
 
     private List<ScriptableBuilding> building;
+    public BaseBuilding selectedBuilding;
 
     public void Awake()
     {
@@ -20,5 +21,10 @@ public class BuildingManager : MonoBehaviour
     {
         //var tile = Transform.postion of Mousclick
         //tile.SetBuilding(spawnedBuilding);
+    }
+
+    public void SetSelectedBuilding(BaseBuilding building)
+    {
+        selectedBuilding = building;
     }
 }
