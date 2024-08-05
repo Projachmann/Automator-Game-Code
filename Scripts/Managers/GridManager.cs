@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridManager : MonoBehaviour
+public class Grid : MonoBehaviour
 {
-    public static GridManager Instance;
     [SerializeField] private int width;
     [SerializeField] private int height;
     [SerializeField] private Tile grassTile, materialTile;
     [SerializeField] private Transform camera;
 
-    private void Awake()
+    private void Start()
     {
-        Instance = this;
+        GenerateGrid();
     }
-    public void GenerateGrid()
+    void GenerateGrid()
     {
         for (int x = 0; x < width; x++)
         {
@@ -30,7 +29,5 @@ public class GridManager : MonoBehaviour
         }
 
         camera.transform.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
-
-        GameManager.Instance.UpdateGameState(GameState.PlaceBuildings);
     }
 }
