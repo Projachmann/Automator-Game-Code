@@ -7,16 +7,22 @@ public class Tile : MonoBehaviour
     [SerializeField] private Color baseColor, offsetColor;
     [SerializeField] private SpriteRenderer renderer;
     [SerializeField] private GameObject highlight;
+    [SerializeField] private bool isPlaceable = true;
+    [SerializeField] private ButtonManager buttonManager;
 
-    void Start()
+    private void Start()
     {
-
+        buttonManager = GameObject.Find("ButtonManager").GetComponent<ButtonManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDown()
     {
-
+        if (isPlaceable && buttonManager.selectedBuilding != null)
+        {
+            isPlaceable = false;
+            Instantiate(buttonManager.selectedBuilding, buttonManager.selectedBuilding.transform.position = gameObject.transform.position, Quaternion.identity);
+            buttonManager.selectedBuilding = null;
+        }
     }
 
     public void Init(bool isOffset)
